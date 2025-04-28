@@ -4,12 +4,10 @@ import { ref, update } from 'firebase/database';
 import { db } from '../config/Config';
 
 export default function EditarScreen({ route, navigation }: any) {
-  const { id, titulo, genero, precio, lanzamiento, anio,uid  } = route.params;
-
+  const { id, titulo, genero, precio, descripcion, anio,uid  } = route.params;
   const [tituloEditar, setTituloEditar] = useState(titulo);
   const [generoEditar, setGeneroEditar] = useState(genero);
-  const [precioEditar, setPrecioEditar] = useState(precio.toString()); 
-  const [lanzamientoEditar, setLanzamientoEditar] = useState(lanzamiento);
+  const [descripcionEditar, setDescripcionEditar] = useState(descripcion);
   const [anioEditar, setAnioEditar] = useState(anio);
 
   const actualizar = () => {
@@ -17,8 +15,7 @@ export default function EditarScreen({ route, navigation }: any) {
     update(peliculaRef, {
       titulo: tituloEditar,
       genero: generoEditar,
-      precio: parseInt(precioEditar),
-      lanzamiento: lanzamientoEditar,
+      descripcion: descripcionEditar,
       anio: anioEditar,
     })
       .then(() => {
@@ -47,15 +44,8 @@ export default function EditarScreen({ route, navigation }: any) {
         style={styles.input}
       />
       <TextInput
-        value={precioEditar}
-        onChangeText={setPrecioEditar}
-        placeholder='Precio'
-        keyboardType="numeric"
-        style={styles.input}
-      />
-      <TextInput
-        value={lanzamientoEditar}
-        onChangeText={setLanzamientoEditar}
+        value={descripcionEditar}
+        onChangeText={setDescripcionEditar}
         placeholder='Lanzamiento'
         style={styles.input}
       />

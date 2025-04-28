@@ -8,8 +8,7 @@ export default function IngresarScreen({navigation}:any) {
 const [id, setid] = useState("");
 const [titulo, settitulo] = useState("");
 const [genero, setgenero] = useState("");
-const [precio, setprecio] = useState("");
-const [lazamiento, setlazamiento] = useState("");
+const [descripcion, setdescripcion] = useState("");
 const [anio, setanio] = useState("");
 
 useEffect(() => {
@@ -24,20 +23,18 @@ useEffect(() => {
 }, [])
 
 function guardar(){
-if(id && titulo && genero && precio &&lazamiento && anio)
+if(id && titulo && genero  &&descripcion && anio)
     set(ref(db,'usuarios/'+id+'/peliculas/'+Date.now()),{
 titulo:titulo,
 genero:genero,
-precio:parseInt(precio),
-lazamiento:lazamiento,
+descripcion:descripcion,
 anio:anio
 })
 .then(()=>{
     Alert.alert("Exito","Datos se guardaron correctamente");
     settitulo('');
     setgenero('');
-    setprecio('');
-    setlazamiento('');
+    setdescripcion('');
     setanio('');
 })
 .catch((error)=>{
@@ -60,18 +57,11 @@ return (
     value={genero}
     onChangeText={setgenero}
     />
-    <TextInput
+   <TextInput
     style={styles.input}
-    placeholder='Precio'
-    value={precio}
-    onChangeText={setprecio}
-    keyboardType='numeric'
-    />
-    <TextInput
-    style={styles.input}
-    placeholder='Lanzamiento'
-    value={lazamiento}
-    onChangeText={setlazamiento}
+    placeholder='descripcion'
+    value={descripcion}
+    onChangeText={setdescripcion}
     />
     <TextInput
     style={styles.input}
